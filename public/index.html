@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Read Webpage</title>
+    <style>
+        html {
+            height: 100%;
+        }
+
+        body {
+            height: 100%;
+            margin: 0;
+            background: #162944;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .button_slide {
+            color: #FFF;
+            border: 2px solid rgb(216, 2, 134);
+            border-radius: 0px;
+            padding: 18px 36px;
+            display: inline-block;
+            font-family: "Lucida Console", Monaco, monospace;
+            font-size: 14px;
+            letter-spacing: 1px;
+            cursor: pointer;
+            box-shadow: inset 0 0 0 0 #D80286;
+            -webkit-transition: ease-out 0.4s;
+            -moz-transition: ease-out 0.4s;
+            transition: ease-out 0.4s;
+            text-decoration: none;
+        }
+
+        .slide_inside:hover {
+            box-shadow: inset 0 0 0 50px #D80286;
+        }
+
+        #outer {
+            width: 364px;
+            text-align: center;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #url {
+            width: 100%;
+            border: 2px solid rgb(216, 2, 134);
+            border-radius: 0px;
+            padding: 18px 36px;
+        }
+
+        #loader {
+            margin-top: 20px;
+        }
+
+        .loader {
+            border: 16px solid #f3f3f3;
+            border-top: 16px solid rgb(216, 2, 134);
+            border-radius: 50%;
+            width: 120px;
+            height: 120px;
+            animation: spin 2s linear infinite;
+        }
+
+        @keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <div id="outer">
+        <input type="text" id="url" name="url" placeholder="Please Enter Url">
+        <span class="button_slide slide_inside" onclick="addItem(url)">Get</span>
+    </div>
+    <div id="loader"></div>
+</body>
+<script>
+    function addItem(url) {
+        var loader = document.getElementById('loader')
+        loader.innerHTML = `<div class="loader"></div>`
+        var data = {
+            url: url.value,
+        };
+        fetch("/read-webpage", {
+            method: "POST",
+            headers: {
+                Accept: "application/json",
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+        }).then((response) => {
+            location.replace(response.url);
+        });
+    }
+</script>
+
+</html>
