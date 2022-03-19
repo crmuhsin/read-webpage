@@ -3,7 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon index"
+    "start": "node index",
+    "dev": "nodemon index"
   },
   "author": "muhsin",
   "license": "MIT",
@@ -15,5 +16,8 @@
   },
   "devDependencies": {
     "nodemon": "^2.0.15"
+  },
+  "engines": {
+    "node": "14.x"
   }
 }
