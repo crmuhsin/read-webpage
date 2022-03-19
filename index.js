@@ -4,7 +4,7 @@ const path = require('path');
 const fs = require('fs');
 
 const app = express()
-const port = 3031
+const port = process.env.PORT || 3031
 
 app.use(express.static(path.join(__dirname, "public")));
 app.use(express.urlencoded({ extended: true }));
